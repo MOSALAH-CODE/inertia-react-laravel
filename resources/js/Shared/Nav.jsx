@@ -16,7 +16,7 @@ export const Nav = () => {
                     </div>
                     <ul className={"d-flex gap-4 list-inline m-0"}>
                         <li><NavLink name={"Home"} active={page.component === "Home"}/></li>
-                        <li><NavLink name={"User"} active={page.component === "User"}/></li>
+                        <li><NavLink name={"Users"} active={page.component === "Users"}/></li>
                         <li><NavLink name={"Settings"} active={page.component === "Settings"}/></li>
                     </ul>
                 </div>
