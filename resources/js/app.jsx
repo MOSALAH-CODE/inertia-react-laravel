@@ -5,17 +5,28 @@ import "../css/main.css"
 import {InertiaProgress} from "@inertiajs/progress";
 import Layout from "./Shared/Layout.jsx";
 
-createInertiaApp({
-    resolve: (name) => import(`./Pages/${name}.jsx`).then((module) => {
-        const {default: page} = module;
-        page.layout = page.layout || ((page) => <Layout children={page}/>);
-        return page;
-    }),
-    setup({el, App, props}) {
-        createRoot(el).render(<App {...props} />)
-    },
+import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
-    title: (title)=>`My App - ${title}`
+const appName = import.meta.env.VITE_APP_NAME || 'My App';
+
+
+createInertiaApp({
+    title: (title) => `${title} - ${appName}`,
+    // resolve: async (name) => {
+    //     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+    //     let page = pages[`./Pages/${name}.jsx`]
+    //     page.default.layout = name.startsWith('Public/') ? undefined : page => <Layout children={page} />
+    //     return page
+    // },
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
+    setup({ el, App, props }) {
+        const root = createRoot(el);
+
+        root.render(<App {...props} />);
+    },
+    progress: {
+        color: '#4B5563',
+    },
 })
 
 

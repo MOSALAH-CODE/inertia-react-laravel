@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Link, usePage} from "@inertiajs/inertia-react";
 import {Col, Container, Row} from "react-bootstrap";
-import {Pagination} from "../Shared/Pagination.jsx";
+import {Pagination} from "../../Shared/Pagination.jsx";
 import {Inertia} from "@inertiajs/inertia";
 
-const Users = (props) => {
+const Index = (props) => {
     const {time, users, filters} = props;
     const page = usePage();
 
@@ -26,6 +26,7 @@ const Users = (props) => {
                     <Col md={6}>
                         <div className={"align-items-center d-flex justify-content-between mb-4"}>
                             <h1 className={"m-0"}>Users</h1>
+                            <Link href={"users/create"}>Create user</Link>
                             <div className="h-100 input-group w-50">
                                 <input type="text" className="form-control"
                                        placeholder="Search..."
@@ -63,4 +64,4 @@ const Users = (props) => {
     )
 }
 
-export default Users
+export default Index
